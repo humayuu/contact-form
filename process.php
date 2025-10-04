@@ -16,7 +16,7 @@ require 'vendor/autoload.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Verify CSRF Token
     if (!hash_equals($_SESSION['__csrf'], $_POST['__csrf'])) {
-        header('Location: index.php?InvalidCSRF=1');
+        header('Location: index.php?error=InvalidCSRF');
         exit;
     }
 
@@ -28,12 +28,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Validate all fields
     if (empty($name) || empty($email) || empty($subject) || empty($message)) {
-        header('Location: index.php?EmptyFields=1');
+        header('Location: index.php?error=EmptyFields');
         exit;
     }
 
     if (!$email) {
-        header('Location: index.php?InvalidEmail=1');
+        header('Location: index.php?error=InvalidEmail');
         exit;
     }
 
@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale.0">
 </head>
 <body style="margin: 0; padding: 0; font-family: Arial, sans-serif; background-color: #f5f5f5;">
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #f5f5f5; padding: 20px 0;">
@@ -191,7 +191,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $mail->send();
 
             // Success redirect
-            header('Location: index.php?MessageSent=1');
+            header('Location: index.php?success=MessageSent');
             exit;
         } else {
             throw new Exception('Database insert failed');
@@ -201,7 +201,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         error_log("Contact Form Error: " . $e->getMessage());
 
         // User-friendly error redirect
-        header('Location: index.php?SendFailed=1');
+        header('Location: index.php?error=SendFailed');
         exit;
     }
 } else {

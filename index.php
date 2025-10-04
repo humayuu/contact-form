@@ -21,23 +21,23 @@
                 <input type="hidden" name="__csrf" value="<?php echo htmlspecialchars($_SESSION['__csrf']) ?>">
                 <!-- Show Error or Success Message -->
                 <?php
-                if (isset($_GET['InvalidCSRF']) && $_GET['InvalidCSRF'] == 1) {
+                if (isset($_GET['error']) && $_GET['error'] == 'InvalidCSRF') {
                     echo '<div class="alert alert-danger" role="alert">
                     Invalid CSRF token. Please try again.
                     </div>';
-                } elseif (isset($_GET['EmptyFields']) && $_GET['EmptyFields'] == 1) {
+                } elseif (isset($_GET['error']) && $_GET['error'] == 'EmptyFields') {
                     echo '<div class="alert alert-danger" role="alert">
                     All fields are required.
                     </div>';
-                } elseif (isset($_GET['InvalidEmail']) && $_GET['InvalidEmail'] == 1) {
+                } elseif (isset($_GET['error']) && $_GET['error'] == 'InvalidEmail') {
                     echo '<div class="alert alert-danger" role="alert">
                     Invalid email address. Please enter a valid email.
                     </div>';
-                } elseif (isset($_GET['MessageSent']) && $_GET['MessageSent'] == 1) {
+                } elseif (isset($_GET['success']) && $_GET['success'] == 'MessageSent') {
                     echo '<div class="alert alert-success" role="alert">
                     Your message has been sent successfully!
                     </div>';
-                } elseif (isset($_GET['SendFailed']) && $_GET['SendFailed'] == 1) {
+                } elseif (isset($_GET['error']) && $_GET['error'] == 'SendFailed') {
                     echo '<div class="alert alert-danger" role="alert">
                     Failed to send message. Please try again later.
                     </div>';
